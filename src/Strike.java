@@ -1,2 +1,2 @@
-public static Strike{
+public class Strike{
 }
