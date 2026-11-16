@@ -5,33 +5,39 @@ public class EMSMainDriver{
 
     static void main(String[] args){
         ManagementSystem company = new ManagementSystem("TechCorp",20);
-        Employee blankEmployee = new Employee(0,"null","null",0);
+        Employee blankEmployee;
         boolean run = true;
-        String temp = "";
-        String temp2 = "";
+        String temp;
+        String temp2;
         Scanner sc = new Scanner(System.in);
-        int tempInt = 0;
-        int tempInt2 = 0;
-        System.out.println("Welcome to the "+company.companyName+" Manager.\nThis Manager will allow easy establishment of the "+company.companyName+" database.\nHope this is convienient, and remember the motto!");
+        int tempInt;
+        int tempInt2;
+        System.out.println("Welcome to the "+company.companyName+" Manager.\nThis Manager will allow easy establishment of the "+company.companyName+" database.\nHope this is convenient, and remember the motto!");
         String format = "\u001B[1;3;31m";
         String end = "\u001B[0m";
         System.out.println(format+"Investors before clients!"+end);
+        company.EmplTest();
         while(run) {
             options();
             switch (getSafeNum()) {
                 case 1:
-                    System.out.println("Please enter Employee's name.");
-                    temp=sc.nextLine();
-                    System.out.println("Please enter Employee's ID.(Not 0)");
-                    tempInt = getSafeNum();
-                    if(tempInt==0){
-                        System.out.println("Bro. Not cool");
-                        tempInt=1;
+                    try {
+                        System.out.println("Please enter Employee's name");
+                        temp = sc.nextLine();
+                        System.out.println("Please enter Employee's ID(Not 0)");
+                        tempInt = getSafeNum();
+                        if (tempInt == 0) {
+                            System.out.println("Bro. Not cool");
+                            tempInt = 4;
+                        }
+                        System.out.println("Please enter Employee's Department");
+                        temp2 = sc.nextLine();
+                        System.out.println("Please enter Employee's Salary");
+                        blankEmployee = new Employee(tempInt, temp, temp2, sc.nextInt());
+                        company.addEmployee(blankEmployee);
+                    }catch(Exception e){
+                        System.out.println("ERR, invalid input.");
                     }
-                    System.out.println("Please enter Employee's Department.");
-                    temp2 = sc.nextLine();
-                    System.out.println("Please enter Employee's Salary.");
-                    company.addEmployee(blankEmployee);
                     break;
                 case 2:
                     company.displayAllEmployees();
@@ -42,13 +48,30 @@ public class EMSMainDriver{
                     break;
                 case 4:
                     System.out.println("Enter Employee ID");
+                    try{
+                        tempInt = sc.nextInt();
+                        System.out.println("Enter raise percentage");
+                        tempInt2 = sc.nextInt();
+                        System.out.println("Whats their new department? (old department was "+company.searchEmployee(tempInt).getDepartment());
 
+                        company.searchEmployee(tempInt).giveRaise(tempInt2);
+                    }catch(Exception e){
+                        System.out.println("ERR, that isn't a valid ID buddy o pal.");
+                    }
                     break;
                 case 5:
+                    System.out.println("What is your employee's ID?");
+                    try{
+                        company.removeEmployee(sc.nextInt());
+                    }catch(Exception e){
+                        System.out.println("ERR, invalid input");}
                     break;
                 case 6:
+                    System.out.println("The total cash that the company spends on employees is "+company.calculateTotalPayroll());
                     break;
                 case 7:
+                    run=false;
+                    System.out.println("Shutting down");
                     break;
                 default:
                     System.out.println("ERR, invalid input. Please put a number from 1-7!");

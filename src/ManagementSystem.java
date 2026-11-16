@@ -5,8 +5,14 @@ public class ManagementSystem{
     final String companyName;
     public ManagementSystem(String companyName, int maxEmployees){//constructor for a new management system obj
         this.companyName = companyName;
-        Employee[] employeeArray = new Employee[maxEmployees];
+        employeeArray = new Employee[maxEmployees];
         count=0;
+    }
+    public void EmplTest(){
+        employeeArray[0]= new Employee(1,"john-doe","HR",112572.53);
+        employeeArray[1]= new Employee(2,"jane-doe","Tech-Staff",52256.85);
+        employeeArray[2]= new Employee(3,"bob-marly","Singer",1052631.57);
+        count=3;
     }
     public boolean addEmployee(Employee emp){//if provided employee, will add that employee to system unless it is a duplicate.
         if(count>=employeeArray.length)
