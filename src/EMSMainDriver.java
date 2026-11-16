@@ -38,9 +38,11 @@ public class EMSMainDriver{
                     break;
                 case 3:
                     System.out.println("Enter Employee ID");
-                    company.searchEmployee(getSafeNum());
+                    company.searchEmployee(getSafeNum()).getEmployeeDetails();
                     break;
                 case 4:
+                    System.out.println("Enter Employee ID");
+
                     break;
                 case 5:
                     break;
