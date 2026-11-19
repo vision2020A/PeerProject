@@ -33,7 +33,8 @@ public class EMSMainDriver{
                         System.out.println("Please enter Employee's Department");
                         temp2 = sc.nextLine();
                         System.out.println("Please enter Employee's Salary");
-                        blankEmployee = new Employee(tempInt, temp, temp2, sc.nextInt());
+                        tempInt2 = getSafeNum();
+                        blankEmployee = new Employee(tempInt, temp, temp2, tempInt2);
                         company.addEmployee(blankEmployee);
                     }catch(Exception e){
                         System.out.println("ERR, invalid input.");
@@ -44,7 +45,7 @@ public class EMSMainDriver{
                     break;
                 case 3:
                     System.out.println("Enter Employee ID");
-                    company.searchEmployee(getSafeNum()).getEmployeeDetails();
+                    System.out.println(company.searchEmployee(getSafeNum()).getEmployeeDetails());
                     break;
                 case 4:
                     System.out.println("Enter Employee ID");
@@ -67,7 +68,7 @@ public class EMSMainDriver{
                         System.out.println("ERR, invalid input");}
                     break;
                 case 6:
-                    System.out.println("The total cash that the company spends on employees is "+company.calculateTotalPayroll());
+                    System.out.println("The total cash that the company spends on employees is "+((Math.round(10*company.calculateTotalPayroll())/10)));
                     break;
                 case 7:
                     run=false;
